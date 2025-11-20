@@ -1,7 +1,7 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-const API_BASE = "http://localhost:5001";
+const API_BASE = "https://tinylink-icao.onrender.com";
 export default function RedirectPage() {
     const { code } = useParams();
     useEffect(() => {
