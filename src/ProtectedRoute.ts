@@ -1,9 +1,11 @@
-import { jsx as _jsx } from "react/jsx-runtime";
 import { Navigate } from "react-router-dom";
+
 export default function ProtectedRoute({ children }) {
-    const token = localStorage.getItem("token");
-    if (!token) {
-        return _jsx(Navigate, { to: "/signin", replace: true });
+    const user = localStorage.getItem("user");
+
+    if (!user) {
+        return <Navigate to="/signin" replace />;
     }
+
     return children;
 }
