@@ -15,7 +15,7 @@ export const loginUser = async (req, res) => {
         });
     }
     catch (e) {
-        console.error("LOGIN ERROR:", e);
+        console.log('REQ BODY:', req.body);
         res.status(500).json({ error: "Server error" });
     }
 };

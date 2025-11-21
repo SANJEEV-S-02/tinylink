@@ -17,7 +17,7 @@ export const registerUser = async (req, res) => {
         return res.status(201).json({ success: true, user });
     }
     catch (e) {
-        console.log("REGISTER ERROR:", e);
+        console.log('REGISTER BODY:', req.body);
         res.status(500).json({ error: "Server error" });
     }
 };

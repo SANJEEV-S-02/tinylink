@@ -43,8 +43,10 @@ export default function SignInForm() {
             navigate("/dashboard");
         }
         catch (err) {
-            toast.error("Network error");
+            console.error("FETCH ERROR:", err);
+            toast.error(err.message);
         }
+
         finally {
             setLoading(false);
         }
