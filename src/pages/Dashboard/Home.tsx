@@ -118,7 +118,7 @@ export default function Home() {
 
                             <input
                                 className="w-full md:w-40 border px-4 py-2 rounded-lg"
-                                placeholder="Custom code"
+                                placeholder="Custom code (optional)"
                                 value={customCode}
                                 onChange={(e) => setCustomCode(e.target.value)}
                             />
