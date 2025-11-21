@@ -1,20 +1,20 @@
-import express from "express";
-import cors from "cors";
-
 import { registerUser } from "./auth/register.js";
 import { loginUser } from "./auth/login.js";
 import linksRoute from "./links/index.js";
 import redirectRoute from "./links/redirect.js";
+import express from 'express';
+import cors from 'cors';
 
 const app = express();
 
-// FIX 1: Required for JSON body parsing
+// 1) BODY PARSER (MUST BE FIRST)
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// FIX 2: Required for Render HTTPS
+// 2) ENABLE PROXY FOR RENDER
 app.enable('trust proxy');
 
-// FIX 3: Correct CORS
+// 3) CORS (VERY IMPORTANT: MUST COME BEFORE ROUTES)
 app.use(
   cors({
     origin: ['http://localhost:5173', 'https://tinylink02.vercel.app'],
@@ -23,16 +23,11 @@ app.use(
   })
 );
 
-app.use(express.json());
+// 4) ROUTES (NOW CORS WILL WORK)
+app.post('/api/auth/register', registerUser);
+app.post('/api/auth/login', loginUser);
 
-// AUTH
-app.post("/api/auth/register", registerUser);
-app.post("/api/auth/login", loginUser);
+app.use('/api/links', linksRoute);
+app.use('/', redirectRoute);
 
-// LINKS
-app.use("/api/links", linksRoute);
-
-// REDIRECT
-app.use("/", redirectRoute);
-
-app.listen(5001, () => console.log("API running at http://localhost:5001"));
+app.listen(5001, () => console.log('API running'));
