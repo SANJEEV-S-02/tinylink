@@ -8,9 +8,16 @@ import redirectRoute from "./links/redirect.js";
 
 const app = express();
 
+// FIX 1: Required for JSON body parsing
+app.use(express.json());
+
+// FIX 2: Required for Render HTTPS
+app.enable('trust proxy');
+
+// FIX 3: Correct CORS
 app.use(
   cors({
-    origin: ['http://localhost:5173', 'https://tinylink02.vercel.app/'],
+    origin: ['http://localhost:5173', 'https://tinylink02.vercel.app'],
     methods: ['GET', 'POST', 'DELETE'],
     credentials: true,
   })
