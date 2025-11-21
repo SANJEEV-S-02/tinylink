@@ -37,10 +37,12 @@ export default function SignInForm() {
             }
             toast.success("Login successful!");
             // SAVE TOKEN
-            if (data.token) {
-                localStorage.setItem("token", data.token);
-            }
-            navigate("/dashboard");
+            // Save user info (optional)
+            localStorage.setItem("user", JSON.stringify(data.user));
+
+            // Navigate always
+            navigate("/dashboard", { replace: true });
+
         }
         catch (err) {
             console.error("FETCH ERROR:", err);
